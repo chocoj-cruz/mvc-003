@@ -83,7 +83,7 @@ const buscar = async () => {
                 const buttonModificar = document.createElement('button');
                 const buttonEliminar = document.createElement('button');
                 td1.innerText = counter;
-                td2.innerText = aplicacion.nombre;
+                td2.innerText = aplicacion.app_nombre;
 
                 buttonModificar.classList.add('btn', 'btn-warning')
                 buttonEliminar.classList.add('btn', 'btn-danger')
