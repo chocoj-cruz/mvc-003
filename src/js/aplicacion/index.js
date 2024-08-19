@@ -107,7 +107,7 @@ const buscar = async () => {
         } else {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.innerText = "No hay productos"
+            td.innerText = "No hay Aplicaciones"
             td.colSpan = 4
 
             tr.appendChild(td)
@@ -161,7 +161,7 @@ const modificar = async (e) => {
 
     try {
         const body = new FormData(formulario)
-        const url = "/proyecto128/API/producto/modificar"
+        const url = "/mvc-003/API/aplicacion/modificar"
         const config = {
             method: 'POST',
             body
@@ -192,7 +192,7 @@ const modificar = async (e) => {
     }
 }
 
-const eliminar = async (producto) => {
+const eliminar = async (aplicacion) => {
     let confirmacion = await Swal.fire({
         icon: 'question',
         title: 'Confirmacion',
@@ -208,8 +208,8 @@ const eliminar = async (producto) => {
     if (confirmacion.isConfirmed) {
         try {
             const body = new FormData()
-            body.append('id', producto.id)
-            const url = "/proyecto128/API/producto/eliminar"
+            body.append('id', aplicacion.app_id)
+            const url = "/mvc-003/API/aplicacion/eliminar"
             const config = {
                 method: 'POST',
                 body
