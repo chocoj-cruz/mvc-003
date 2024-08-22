@@ -3,8 +3,8 @@ import { Toast, validarFormulario } from "../funciones";
 import Swal from "sweetalert2";
 
 
-const formulario = document.getElementById('formAplicacion')
-const tabla = document.getElementById('tablaAplicacion')
+const formulario = document.getElementById('formRol')
+const tabla = document.getElementById('tablaRol')
 const btnGuardar = document.getElementById('btnGuardar')
 const btnModificar = document.getElementById('btnModificar')
 const btnCancelar = document.getElementById('btnCancelar')
@@ -14,11 +14,10 @@ btnModificar.disabled = true
 btnCancelar.parentElement.style.display = 'none'
 btnCancelar.disabled = true
 
-
 const guardar = async (e) => {
     e.preventDefault()
 
-    if (!validarFormulario(formulario, ['app_id'])) {
+    if (!validarFormulario(formulario, ['rol_id'])) {
         Swal.fire({
             title: "Campos vacios",
             text: "Debe llenar todos los campos",
@@ -29,7 +28,7 @@ const guardar = async (e) => {
 
     try {
         const body = new FormData(formulario)
-        const url = "/mvc-003/API/aplicacion/guardar"
+        const url = "/mvc-003/API/rol/guardar"
         const config = {
             method: 'POST',
             body
@@ -58,10 +57,9 @@ const guardar = async (e) => {
     }
 }
 
-
 const buscar = async () => {
     try {
-        const url = "/mvc-003/API/aplicacion/buscar"
+        const url = "/mvc-003/API/rol/buscar"
         const config = {
             method: 'GET',
         }
@@ -74,27 +72,32 @@ const buscar = async () => {
         console.log(datos);
         if (codigo == 1) {
             let counter = 1;
-            datos.forEach(aplicacion => {
+            datos.forEach(rol => {
                 const tr = document.createElement('tr');
                 const td1 = document.createElement('td');
                 const td2 = document.createElement('td');
                 const td3 = document.createElement('td');
                 const td4 = document.createElement('td');
+                const td5 = document.createElement('td');
+                const td6 = document.createElement('td');
                 const buttonModificar = document.createElement('button');
                 const buttonEliminar = document.createElement('button');
-                td1.innerText = counter;
-                td2.innerText = aplicacion.app_nombre;
+                td1.innerText = counter
+                td2.innerText = rol.rol_nombre
+                td3.innerText = rol.rol_nombre_ct
+                td4.innerText = rol.rol_app
+
 
                 buttonModificar.classList.add('btn', 'btn-warning')
                 buttonEliminar.classList.add('btn', 'btn-danger')
                 buttonModificar.innerText = 'Modificar'
                 buttonEliminar.innerText = 'Eliminar'
 
-                buttonModificar.addEventListener('click', () => traerDatos(aplicacion))
-                buttonEliminar.addEventListener('click', () => eliminar(aplicacion))
+                buttonModificar.addEventListener('click', () => traerDatos(rol))
+                buttonEliminar.addEventListener('click', () => eliminar(rol))
 
-                td3.appendChild(buttonModificar)
-                td4.appendChild(buttonEliminar)
+                td5.appendChild(buttonModificar)
+                td6.appendChild(buttonEliminar)
 
                 counter++
 
@@ -102,13 +105,15 @@ const buscar = async () => {
                 tr.appendChild(td2)
                 tr.appendChild(td3)
                 tr.appendChild(td4)
+                tr.appendChild(td5)
+                tr.appendChild(td6)
                 fragment.appendChild(tr)
             })
         } else {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.innerText = "No hay Aplicaciones"
-            td.colSpan = 4
+            td.innerText = "No hay rols"
+            td.colSpan = 6
 
             tr.appendChild(td)
             fragment.appendChild(tr)
@@ -122,10 +127,12 @@ const buscar = async () => {
 }
 buscar();
 
-const traerDatos = (aplicacion) => {
-    console.log(aplicacion);
-    formulario.app_id.value = aplicacion.app_id
-    formulario.app_nombre.value = aplicacion.app_nombre
+const traerDatos = (rol) => {
+    console.log(rol);
+    formulario.rol_id.value = rol.rol_id
+    formulario.rol_nombre.value = rol.rol_nombre
+    formulario.rol_nombre_ct.value = rol.rol_nombre_ct
+    formulario.rol_app.value = rol.rol_app
     tabla.parentElement.parentElement.style.display = 'none'
 
     btnGuardar.parentElement.style.display = 'none'
@@ -161,7 +168,7 @@ const modificar = async (e) => {
 
     try {
         const body = new FormData(formulario)
-        const url = "/mvc-003/API/aplicacion/modificar"
+        const url = "/mvc-003/API/rol/modificar"
         const config = {
             method: 'POST',
             body
@@ -192,7 +199,7 @@ const modificar = async (e) => {
     }
 }
 
-const eliminar = async (aplicacion) => {
+const eliminar = async (rol) => {
     let confirmacion = await Swal.fire({
         icon: 'question',
         title: 'Confirmacion',
@@ -208,8 +215,8 @@ const eliminar = async (aplicacion) => {
     if (confirmacion.isConfirmed) {
         try {
             const body = new FormData()
-            body.append('app_id', aplicacion.app_id)
-            const url = "/mvc-003/API/aplicacion/eliminar"
+            body.append('rol_id', rol.rol_id)
+            const url = "/mvc-003/API/rol/eliminar"
             const config = {
                 method: 'POST',
                 body
@@ -217,7 +224,6 @@ const eliminar = async (aplicacion) => {
 
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
-            console.log(data)
             const { codigo, mensaje, detalle } = data;
             let icon = 'info'
             if (codigo == 1) {

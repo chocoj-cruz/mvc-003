@@ -22,18 +22,20 @@
     </form>
 </div>
 <div class="row justify-content-center">
-        <div class="col-lg-8 table-responsive">
-            <table class="table table-bordered table-hover bg-light" id="tablaAplicacion">
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  
-                </tbody>
-            </table>
-        </div>
+    <div class="col-lg-8 table-responsive">
+        <table class="table table-bordered table-hover bg-light" id="tablaAplicacion">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4">No hay Aplicaciones registradas</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <script src="<?= asset('./build/js/aplicacion/index.js') ?>"></script>
+</div>
+<script src="<?= asset('./build/js/aplicacion/index.js') ?>"></script>

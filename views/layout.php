@@ -37,12 +37,14 @@
                                 <a class="dropdown-item nav-link text-white " href="/mvc-003/inicio_sesion"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Iniciar Sesion</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/mvc-003/aplicacion"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>aplicaciones</a>
+                                <a class="dropdown-item nav-link text-white " href="/mvc-003/aplicacion"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Aplicaciones</a>
                             </li>
-                        
-                        
-                    
-                        
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/mvc-003/usuario"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Usuarios</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/mvc-003/rol"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Asignacion de Roles</a>
+                            </li>
                         </ul>
                     </div> 
 

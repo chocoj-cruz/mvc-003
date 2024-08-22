@@ -7,7 +7,7 @@ class Aplicacion extends ActiveRecord{
     //aca va el nombre del id de la tabla
     protected static $idTabla = 'app_id';
     //aca van los nombres de los campos
-    protected static $columnasDB = ['app_nombre'];
+    protected static $columnasDB = ['app_nombre','app_situacion'];
 
     public $app_id;
     public $app_nombre;
