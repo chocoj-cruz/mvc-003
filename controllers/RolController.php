@@ -13,9 +13,9 @@ class RolController
     {   
         $sql = "SELECT * FROM aplicacion where app_situacion = 1";
 
-        $resultado = Aplicacion::fetchArray($sql);
+        $rol = Aplicacion::fetchArray($sql);
         $router->render('rol/index', [
-            'aplicaciones' => $resultado
+            'aplicaciones' => $rol
         ]);
     }
 
@@ -26,8 +26,8 @@ class RolController
         $_POST['rol_app'] = filter_var($_POST['rol_app'], FILTER_SANITIZE_NUMBER_INT);
 
         try {
-            $respuesta = new Rol($_POST);
-            $resultado = $respuesta->crear();
+            $rol = new Rol($_POST);
+            $resultado = $rol->crear();
             http_response_code(200);
             echo json_encode([
                 'codigo' => 1,
@@ -43,20 +43,24 @@ class RolController
         }
     }
 
-    public static function BuscarAPI()
+    public static function buscarAPI()
     {
         try {
-
-            $sql = "SELECT rol_id, rol_nombre, rol_app, rol_nombre_ct, app_nombre FROM rol INNER JOIN aplicacion ON app_id = rol_app WHERE rol_situacion = 1";
-
-            $resultado = Rol::fetchArray($sql);
+            // ORM - ELOQUENT
+            // $productos = Producto::all();
+            $rol = Rol::obtenerRol();
             http_response_code(200);
-            echo json_encode($resultado);
+            echo json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Datos encontrados',
+                'detalle' => '',
+                'datos' => $rol
+            ]);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
                 'codigo' => 0,
-                'mensaje' => 'Error al buscar productos',
+                'mensaje' => 'Error al buscar aplicaciones',
                 'detalle' => $e->getMessage(),
             ]);
         }
@@ -70,12 +74,12 @@ class RolController
         $id = filter_var($_POST['rol_id'], FILTER_SANITIZE_NUMBER_INT);
 
         try {
-            $resultado = Rol::find($id);
-            $resultado->sincronizar($_POST);
-            $resultado->actualizar();
+            $rol = Rol::find($id);
+            $rol->sincronizar($_POST);
+            $rol->actualizar();
             http_response_code(200);
             echo json_encode([
-                'codigo' => 3,
+                'codigo' => 1,
                 'mensaje' => 'Rol modificado exitosamente',
             ]);
         } catch (Exception $e) {
@@ -91,19 +95,19 @@ class RolController
     public static function eliminarAPI()
     {
 
-        $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+        $id = filter_var($_POST['rol_id'], FILTER_SANITIZE_NUMBER_INT);
         try {
 
-            $resultado = Rol::find($id);
-            $resultado->sincronizar([
+            $rol = Rol::find($id);
+            $rol->sincronizar([
                 'rol_situacion' => 0
             ]);
             // echo json_encode($resultado);
             // exit;
-            $resultado->actualizar();
+            $rol->actualizar();
             http_response_code(200);
             echo json_encode([
-                'codigo' => 4,
+                'codigo' => 1,
                 'mensaje' => 'Rol eliminado exitosamente',
             ]);
         } catch (Exception $e) {

@@ -1,6 +1,7 @@
 import { Dropdown } from "bootstrap";
 import { Toast, validarFormulario } from "../funciones";
 import Swal from "sweetalert2";
+import { Table } from "fullcalendar";
 
 
 const formulario = document.getElementById('formRol')
@@ -36,6 +37,7 @@ const guardar = async (e) => {
 
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
+        console.log(data);
         const { codigo, mensaje, detalle } = data;
         let icon = 'info'
         if (codigo == 1) {
@@ -112,7 +114,7 @@ const buscar = async () => {
         } else {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.innerText = "No hay rols"
+            td.innerText = "No hay Roles Asignados"
             td.colSpan = 6
 
             tr.appendChild(td)
@@ -186,7 +188,7 @@ const modificar = async (e) => {
             cancelar();
         } else {
             icon = 'error'
-            console.log(detalle);
+            console.log('Detalle del error:',detalle);
         }
 
         Toast.fire({
@@ -195,7 +197,7 @@ const modificar = async (e) => {
         })
 
     } catch (error) {
-        console.log(error);
+        console.log('Error en el catch:', error);
     }
 }
 

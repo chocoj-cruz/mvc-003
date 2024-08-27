@@ -21,7 +21,12 @@ class Rol extends ActiveRecord
         $this->rol_nombre_ct = $args['rol_nombre_ct'] ?? '';
         $this->rol_app = $args['rol_app'] ?? null ;
         $this->rol_situacion = $args['rol_situacion'] ?? 1;
-    }
+}
 
+    public static function obtenerRol()
+    {
+        $sql = "SELECT * FROM rol where rol_situacion = 1";
+        return self::fetchArray($sql);
+}
 
 }

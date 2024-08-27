@@ -45,14 +45,12 @@
                 <tr>
                     <th>No.</th>
                     <th>Nombre</th>
-                    <th>Catalogo</th>
-                    <th>Contraseña</th>
+                    <th>Nombre ct</th>
+                    <th>Aplicacion</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td colspan="4">No hay Roles registrados</td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
